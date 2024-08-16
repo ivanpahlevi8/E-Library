@@ -12,8 +12,13 @@ E-Library Web Application
 6. Run migration by running this command `python manage migrate`
 7. Run command `python manage.py runserver`
 ### Within Application
-6. First page will be login page, click register to add credentials
-7. After register, user will be directed to home page with button to show all apps
+1. First page will be login page, click register to add credentials
+2. After register, user will be directed to home page with button to show all apps
+3. User can view all book information with action button including info book, update book, and delete book
+4. User can view book with it's image cover
+5. User can update all book entry and also updating it's image
+6. User can add book and also book image with number of image is depends on what user want
+7. User can logout themselve
 
 ## Application Snipshot
 1. Login Page

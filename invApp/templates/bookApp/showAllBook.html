@@ -1,0 +1,39 @@
+<!-- Extend the base layout from the layout.html -->
+{% extends "bookAPp/layout.html" %} {% block title %} Book List {% endblock %} {% block content %}
+<h1 class="text-center">Books</h1>
+<table class="table table-bordered table-striped ">
+    <thead class="thead-dark">
+        <tr>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Book Auhtor</th>
+            <th>Publication Date</th>
+            <th>Book Category</th>
+            <th>Book Description</th>
+            <th>Book Status</th>
+            <th>Book Score</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in allBook %}
+        <tr>
+            <td>{{ book.book_id }} </td>
+            <td>{{ book.book_title }} </td>
+            <td>{{ book.book_author }} </td>
+            <td>{{ book.publication_date }} </td>
+            <td>{{ book.book_category }} </td>
+            <td>{{ book.book_description }} </td>
+            <td>{{ book.book_status }} </td>
+            <td>{{ book.book_score }} </td>
+
+            <td class="text-center">
+                <a href="{% url 'show-book' book.book_id %}" class="btn btn-primary">Info</a>
+                <a href="{% url 'update-book' book.book_id %}" class="btn btn-warning mt-2">Update</a>
+                <a href="{% url 'delete-book' book.book_id %}" class="btn btn-danger mt-2">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

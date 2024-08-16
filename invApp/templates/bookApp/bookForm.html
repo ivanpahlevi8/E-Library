@@ -1,0 +1,61 @@
+<!-- Extend the base layout from the layout.html -->
+{% extends "bookApp/layout.html" %} {% block title %} Book Form {% endblock %} {% block content %}
+<h1 class="text-center">Book Form</h1>
+
+<form method="POST" class="jumbotron" enctype="multipart/form-data">
+    {% csrf_token %} {{ bookForm }}
+
+    <!-- Existing Book Image Preview (for update) -->
+    {% if current_images %}
+    <div class="form-group">
+        <label for="existing_image" class="control-label">Current Book Image:</label>
+        <div>
+            {% for image in current_images %}
+            <img src="{{ image.image.url }}" alt="Book Image" class="img-thumbnail" width="200px"> {% endfor %}
+        </div>
+        <small class="form-text text-muted">These are the current images associated with this book. Upload a new image to replace them.</small>
+    </div>
+    {% endif %}
+
+    <!-- Book Image Upload Section -->
+    <div class="form-group">
+        <label for="images" class="control-label">Upload Images:</label>
+        <input type="file" name="images" id="images" multiple class="form-control-file" onchange="previewSelectedImage(event)">
+        <small class="form-text text-muted">You can select multiple images</small>
+    </div>
+
+    <!-- Selected Image Preview -->
+    <div class="form-group">
+        <label for="preview" class="control-label">Selected Images Preview:</label>
+        <div id="image-preview"></div>
+    </div>
+
+    <button class="btn btn-success btn-block" type="submit">Save Book</button>
+</form>
+
+<script>
+    // JavaScript to preview selected images
+    function previewSelectedImage(event) {
+        var files = event.target.files;
+        var preview = document.getElementById('image-preview');
+        preview.innerHTML = ''; // Clear any previous previews
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var img = document.createElement("img");
+                img.src = e.target.result;
+                img.classList.add("img-thumbnail");
+                img.style.width = "200px";
+                img.style.marginRight = "10px";
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+{% endblock %}

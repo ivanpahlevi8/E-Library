@@ -1,0 +1,13 @@
+{% extends "bookApp/layout.html" %} {% block title %} Home {% endblock %} {% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the Books Management System</h1>
+    <p class="lead">
+        Manage your books efficiently and effectively.
+    </p>
+    <hr class="my-4">
+    <p>
+        Use the navigation bar to add, view, update or delete books.
+    </p>
+    <a href="{% url 'all-book' %}" class="btn btn-primary btn-lg" role="button">View Books</a>
+</div>
+{% endblock %}
